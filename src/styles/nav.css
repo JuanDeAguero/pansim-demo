@@ -1,0 +1,113 @@
+.nav, .nav-minimized {
+    height: calc(100% - 50px);
+    position: fixed;
+    width: 300px;
+    top: 50px;
+}
+.nav-minimized {
+    width: 85px;
+}
+.hamburger {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40px;
+    left: 27px;
+    align-items: center;
+    justify-content: center;
+}
+.nav-title {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    font-size: 20px;
+    height: 30px;
+    margin-bottom: 30px;
+    margin-left: 80px;
+    margin-top: 40px;
+}
+.nav-buttons, .nav-buttons-minimized {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 130px);
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-left: 15px;
+}
+.nav-button, .nav-button-minimized {
+    align-items: center;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    height: 50px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    width: 250px;
+}
+.nav-button-minimized {
+    width: 50px;
+}
+.nav-button *, .nav-button-minimized * {
+    background-color: transparent;
+    font-size: 16px;
+}
+.nav-button:hover, .nav-button-minimized:hover {
+    background-color: white;
+}
+.nav-selected {
+    background-color: white;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+}
+.nav-icon {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 6px;
+    overflow: visible;
+    transform: scale(120%);
+    width: 30px;
+}
+.nav-icon-sims {
+    transform: translateX(-2px) scale(120%);
+}
+.nav-logout {
+    flex-direction: row;
+}
+.nav-close, .nav-close-minimized {
+    position: absolute;
+    visibility: hidden;
+    background-color: rgb(230, 230, 230);
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30px;
+    left: 20px;
+}
+@media only screen and (min-width: 0) and (max-width: 1000px) {
+    .nav {
+        background-color: rgb(250, 250, 250);
+        z-index: 1;
+        width: 100%;
+    }
+    .nav-minimized {
+        visibility: hidden;
+    }
+    .nav-buttons-minimized, .nav-title {
+        visibility: hidden;
+    }
+    .nav-button {
+        width: calc(100% - 15px);
+    }
+    .hamburger {
+        visibility: hidden;
+    }
+    .nav-close {
+        visibility: visible;
+    }
+}

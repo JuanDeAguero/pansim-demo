@@ -1,0 +1,98 @@
+.profile-title {
+    background-color: transparent;
+    font-size: 25px;
+    font-weight: 500;
+    height: 30px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    position: relative;
+}
+.profile {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+    position: relative;
+    align-items: center;
+    padding-bottom: 60px;
+}
+.profile-picture {
+    margin-top: 40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-picture-letter {
+    font-size: 80px;
+    color: white;
+    font-weight: 500;
+}
+.profile-text {
+    font-size: 17px;
+    width: 300px;
+    height: 35px;
+    text-align: center;
+}
+.profile-inputs {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+.profile-text-input {
+    margin-bottom: 10px;
+    width: 300px;
+    height: 35px;
+    padding-left: 10px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+}
+.profile-edit, .profile-save {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+}
+.profile-edit {
+    background-color: rgb(210, 210, 210);
+}
+.profile-edit * {
+    color: rgb(80, 80, 80);
+}
+.profile-save {
+    background-color: rgb(161, 183, 224);
+}
+.profile-save * {
+    color: white;
+}
+.profile-edit-icon {
+    margin-left: 5px;
+    transform: scale(80%);
+}
+.profile-colors {
+    margin-top: 50px;
+    display: flex;
+    width: 400px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow: visible;
+}
+.profile-color {
+    background-color: blue;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}

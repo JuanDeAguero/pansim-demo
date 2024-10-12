@@ -1,0 +1,184 @@
+.new-sim-create-config {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+}
+.new-sim-create-config-title {
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.new-sim-upload-button {
+    align-items: center;
+    background-color: rgb(215, 215, 215);
+    border-radius: 15px;
+    flex-direction: row;
+    height: 30px;
+    overflow: visible;
+    padding-left: 25px;
+    padding-right: 30px;
+}
+.new-sim-upload-icon {
+    background-color: transparent;
+    margin-right: 5px;
+    overflow: visible;
+    transform: scale(80%) translateY(-1px);
+}
+.new-sim-upload-text {
+    background-color: transparent;
+    font-size: 14px;
+}
+.new-sim-create {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    width: 700px;
+}
+.new-sim-create-title {
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.new-sim-select-config-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: calc(100% - 20px);
+}
+.new-sim-select-config {
+    align-items: center;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    justify-content: space-between;
+    margin-left: 20px;
+    width: calc(100% - 160px);
+}
+.new-sim-select-config-text {
+    background-color: transparent;
+    margin-left: 15px;
+}
+.new-sim-select-config-icon {
+    background-color: transparent;
+    margin-right: 15px;
+    overflow: visible;
+}
+.new-sim-configs {
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+    margin-top: 10px;
+}
+.new-sim-divider {
+    background-color: rgb(235, 235, 235);
+    height: 1px;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+}
+.new-sim-divider-name {
+    margin-top: 20px;
+}
+.new-sim-create-button-wrapper {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    height: 80px;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+.custom-button {
+    background-color: rgb(161, 183, 224);
+    border-radius: 15px;
+    display: flex;
+    font-size: 14px;
+    height: 30px;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.custom-button:hover {
+    background-color: rgb(153, 174, 214);
+}
+.custom-button * {
+    color: white;
+    font-weight: 500;
+}
+.custom-button-loader {
+    transform: scale(60%);
+}
+.new-sim-param {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    height: 55px;
+    justify-content: space-between;
+    margin-left: 20px;
+    overflow: visible;
+    width: calc(100% - 40px);
+}
+.new-sim-input-text {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 10px;
+    width: 200px;
+}
+.new-sim-create-input-number {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 10px;
+    width: 80px;
+}
+.new-sim-file-text {
+    color: rgb(60, 60, 60);
+    font-size: 14px;
+}
+.new-sim-loading {
+    display: flex;
+    height: 20px;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+    background-color: rgb(215, 215, 215);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.new-sim-loading-progress {
+    width: 10%;
+    background-color: rgb(153, 174, 214);
+}
+.new-sim-loading-numbers {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.success-message, .error-message {
+    background-color: rgb(255, 142, 142);
+    height: 40px;
+    color: white;
+    align-content: center;
+    justify-content: center;
+    padding-left: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: calc(100% - 60px);
+}
+.success-message {
+    background-color: rgb(127, 205, 127);
+}

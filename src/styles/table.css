@@ -1,0 +1,28 @@
+.table-columns {
+    background-color: transparent;
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+}
+.table-column {
+    background-color: transparent;
+    color: rgb(150, 150, 150);
+    font-size: 12px;
+    font-weight: 500;
+}
+.table-divider {
+    background-color: rgb(235, 235, 235);
+    height: 1px;
+    width: 100%;
+}
+.table-elements {
+    background-color: transparent;
+    display: flex;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+}
+.table-element {
+    background-color: transparent;
+    display: flex;
+}

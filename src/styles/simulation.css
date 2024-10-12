@@ -1,0 +1,322 @@
+.sim-title-props {
+    display: flex;
+    margin-left: 30px;
+}
+.sim-title-status {
+    align-items: center;
+    background-color: rgb(210, 210, 210);
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    font-weight: 500;
+    height: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 10px;
+}
+.sim-results {
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+}
+.sim-results-title {
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.sim-results-numbers {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    overflow: visible;
+    width: calc(100% - 40px);
+}
+.sim-results-number {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-right: 40px;
+    overflow: visible;
+}
+.sim-results-number-input {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    height: 30px;
+    margin-left: 20px;
+    padding-left: 10px;
+    width: 80px;
+}
+.sim-results-chart {
+    height: 500px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
+    overflow: visible;
+    width: 500px;
+}
+.sim-results-modes {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.sim-results-mode {
+    background-color: rgb(240, 240, 240);
+    color: rgb(50, 50, 50);
+    height: 40px;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+.sim-filters {
+    column-gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.sim-filter {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+}
+.sim-filter-color {
+    height: 6px;
+    margin-right: 10px;
+    width: 35px;
+}
+.sim-filter-checkbox {
+    cursor: pointer;
+    margin-left: 10px;
+}
+.sim-config {
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+}
+.sim-config-title {
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.sim-config-button {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 18px;
+}
+.sim-config-button-content {
+    align-items: center;
+    display: flex;
+}
+.sim-config-text {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+.sim-open-icon {
+    margin-left: 5px;
+    overflow: visible;
+    transform: scale(80%);
+}
+.sim-refresh-button {
+    margin-left: 20px;
+}
+.sim-refresh-button-content {
+    align-items: center;
+    display: flex;
+}
+.sim-refresh-icon {
+    margin-left: 5px;
+    overflow: visible;
+    transform: scale(80%);
+}
+.sim-logs {
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+    padding-bottom: 20px;
+}
+.sim-logs-list {
+    max-height: 220px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.sim-log {
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+.sim-status-refresh {
+    background-color: rgb(210, 210, 210);
+    margin-right: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.sim-status-refresh:hover {
+    background-color: rgb(195, 195, 195);
+}
+.sim-status-refresh-icon {
+    transform: scale(80%);
+}
+.sim-download-button {
+    padding-right: 18px;
+    background-color: rgb(210, 210, 210);
+    margin-right: 10px;
+    margin-left: 0;
+}
+.sim-download-button:hover {
+    background-color: rgb(195, 195, 195);
+}
+.sim-download-icon {
+    margin-left: 5px;
+}
+@media only screen and (min-width: 0) and (max-width: 1000px) {
+    .sim-title {
+        margin-left: 50px;
+    }
+}
+.sim-share-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.sim-share {
+    padding: 30px;
+    background-color: white;
+    width: 500px;
+    border-radius: 10px;
+    position: relative;
+}
+.sim-share-user {
+    width: 50px;
+    height: 50px;
+    background-color: gray;
+    border-radius: 25px;
+    margin-right: 5px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+}
+.sim-share-users-list {
+    max-height: 110px;
+    margin-bottom: 30px;
+}
+.sim-share-user-list {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(205, 205, 205);
+    background-color: rgb(235, 235, 235);
+    width: 100%;
+    margin-bottom: 5px;
+    height: 40px;
+    border-radius: 5px;
+    justify-content: center;
+    padding-left: 20px;
+}
+.sim-share-title-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.sim-share-title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+.sim-share-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgb(230, 230, 230);
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sim-share-viewers-list {
+    display: flex;
+    margin-bottom: 20px;
+}
+.sim-share-viewers-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.sim-share-find-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.sim-share-find-search {
+    display: flex;
+    overflow: visible;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.sim-share-find-input {
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+    padding-left: 10px;
+}
+.sim-share-buttons {
+    display: flex;
+}
+.sim-share-button {
+    height: 40px;
+    background-color: rgb(235, 235, 235);
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.sim-share-button:hover {
+    background-color: rgb(220, 220, 220);
+    font-weight: 500;
+}
+.sim-share-button-red:hover {
+    background-color: rgb(255, 190, 190);
+}
+.sim-share-selected {
+    margin-top: 20px;
+}
+.message-share {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-bottom: 0;
+    width: calc(100% - 20px);
+}

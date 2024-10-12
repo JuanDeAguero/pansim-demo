@@ -1,0 +1,47 @@
+.configs-create {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    background-color: rgb(161, 183, 224);
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+.configs-create * {
+    color: white;
+    font-weight: bold;
+}
+.configs-my {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+    height: 410px;
+    position: relative;
+}
+.configs-my-title {
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.configs-change-page {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.configs-my-table {
+    background-color: transparent;
+    margin-left: 20px;
+    width: calc(700px - 40px);
+}
+.configs-config-name, .configs-config-date {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
