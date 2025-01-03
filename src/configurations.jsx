@@ -8,6 +8,7 @@ import { PageTitle } from "./page"
 import { Table } from "./table"
 import { TableElement } from "./table"
 import { TableRow } from "./table"
+import { truncate } from "./dashboard"
 import { useAuth } from "./auth"
 import { useCallback } from "react"
 import { useEffect } from "react"
@@ -43,7 +44,7 @@ const Config = ({ config, setConfigEditMode, updateConfigs, authToken }) => {
     return(
     <TableRow>
       <TableElement>
-        <div className="configs-config-name">{!deleting ? config.scenario_name : "Deleting..."}</div>
+        <div className="configs-config-name">{!deleting ? truncate(config.scenario_name, 22) : "Deleting..."}</div>
       </TableElement>
       <TableElement>
         <div className="configs-config-date">{config.created_at.slice(0, 10)}</div>
@@ -69,6 +70,28 @@ const Config = ({ config, setConfigEditMode, updateConfigs, authToken }) => {
     )
 }
 
+const Template = ({  }) => {
+
+    return(
+    <TableRow>
+      <TableElement>
+        <div className="configs-config-name">template 1</div>
+      </TableElement>
+      <TableElement>
+        <div className="configs-config-name"></div>
+      </TableElement>
+      <TableElement>
+        <div className="dash-sim-view">
+          <button className="dash-sim-view-button"
+            onClick={() => {}}>
+            Add
+          </button>
+        </div>
+      </TableElement>
+    </TableRow>
+    )
+}
+
 const Configurations = ({ setConfigEditMode, minimized, setMinimized }) => {
 
     const [configurations, setConfigurations] = useState([])
@@ -84,8 +107,12 @@ const Configurations = ({ setConfigEditMode, minimized, setMinimized }) => {
         const params = { "page": currentConfigPage }
         get("job-config/", authToken, params).then((data) => {
             setTotalConfigs(data.count)
+            data.results.reverse()
             setConfigurations(data.results)
             setConfigsLoading(false)
+        }).catch((error) => {
+            console.log(error)
+            setCurrentConfigPage(1)
         })
     }, [authToken, currentConfigPage])
 
@@ -126,6 +153,27 @@ const Configurations = ({ setConfigEditMode, minimized, setMinimized }) => {
         {(!configsLoading && configurations.length == 0) &&
           <div className="dash-empty-message">There are no configurations.</div>}
       </div>
+      {false ? <div className="configs-my">
+        <div className="configs-my-title">Templates</div>
+        <ChangePage extraStyle={"configs-change-page"} currentPage={currentConfigPage}
+          setCurrentPage={setCurrentConfigPage} totalPages={Math.ceil(totalConfigs / 5)}
+          loading={configsLoading} />
+        <div className="configs-my-table">
+          <Table columns={[
+            { name: "SCENARIO NAME", width: "30%" },
+            { name: "DESCRIPTION",  width: "55%" },
+            { name: "",  width: "15%" }
+          ]}>
+            {configsLoading ?
+              Array.from({ length: 5 }).map((_, index) => (
+                <LoadingRow className="dash-sim-loading" count={3} key={index} />
+              )) :
+              configurations.map(config => <Template />)}
+          </Table>
+        </div>
+        {(!configsLoading && configurations.length == 0) &&
+          <div className="dash-empty-message">There are no configurations.</div>}
+      </div> : null}
     </Page>
     )
 }

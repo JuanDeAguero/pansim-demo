@@ -6,10 +6,15 @@ import { percentages } from "./simulations"
 import { Table } from "./table"
 import { TableElement } from "./table"
 import { TableRow } from "./table"
+import { useApi } from "./requests"
 import { useAuth } from "./auth"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+
+const truncate = (name, num) => {
+    return name.length > num ? name.slice(0, num) + "..." : name
+}
 
 const SimulationInProgress = ({ job }) => {
 
@@ -18,7 +23,7 @@ const SimulationInProgress = ({ job }) => {
     return(
     <button className="dash-in-progress-sim"
       onClick={() => navigate("simulation/" + String(job.id))}>
-      <div className="dash-in-progress-name">{job.name}</div>
+      <div className="dash-in-progress-name">{truncate(job.name, 18)}</div>
       <div className="dash-in-progress-status">Status: {job.status}</div>
       <div className="dash-in-progress-time">Estimated time: ...</div>
       <div className="dash-in-progress-bar">
@@ -37,7 +42,7 @@ const SimulationCompleted = ({ job }) => {
     <TableRow>
       <TableElement>
         <div className="dash-sim-name-wrapper">
-          <div>{job.name}</div>
+          <div>{truncate(job.name, 18)}</div>
           <div className="dash-sim-name-instances">{job.number_of_simulations} instances</div>
         </div>
       </TableElement>
@@ -65,7 +70,7 @@ const SimulationShared = ({ job }) => {
     <TableRow>
       <TableElement>
         <div className="dash-sim-name-wrapper">
-          <div>{job.name}</div>
+          <div>{truncate(job.name, 18)}</div>
           <div className="dash-sim-name-instances">{job.number_of_simulations} instances</div>
         </div>
       </TableElement>
@@ -118,6 +123,8 @@ const ViewAll = ({ shared }) => {
 
 const Dashboard = ({ minimized, setMinimized }) => {
 
+    const { get } = useApi()
+
     const [jobsInProgress, setJobsInProgress] = useState([])
     const [jobsCompleted, setJobsCompleted] = useState([])
     const [jobsShared, setJobsShared] = useState([])
@@ -130,8 +137,64 @@ const Dashboard = ({ minimized, setMinimized }) => {
     const { authToken } = useAuth()
 
     useEffect(() => {
+
+        setTimeout(() => {
+            const inProgress = [
+                {
+                    id: 1,
+                    name: "Demo job 1",
+                    status: "SUBMITTED"
+                },
+                {
+                    id: 1,
+                    name: "Demo job 2",
+                    status: "RUNNING"
+                }
+            ]
+            setJobsInProgress(inProgress)
+
+            const completed = [
+                {
+                    id: 1,
+                    name: "Demo job 3",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 3,
+                    end_time: "2024-10-12T20:53:30.45"
+                },
+                {
+                    id: 1,
+                    name: "Demo job 4",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 10,
+                    end_time: "2024-10-12T20:53:30.45"
+                },
+                {
+                    id: 1,
+                    name: "Demo job 5",
+                    status: "FAILED",
+                    number_of_simulations: 5,
+                    end_time: "2024-10-12T20:53:30.45"
+                }
+            ]
+            setJobsCompleted(completed)
+
+            const shared = [
+                {
+                    id: 1,
+                    name: "Demo job 6",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 7,
+                    start_time: "2024-10-12T20:53:30.45"
+                }
+            ]
+            setJobsShared(shared)
+
+            setJobsInProgressLoading(false)
+            setJobsCompletedLoading(false)
+            setJobsSharedLoading(false)
+        }, 2000)
+
         const fetchJobs = async (statuses, shared) => {
-            return []
             setJobsInProgressLoading(true)
             setJobsCompletedLoading(true)
             setJobsSharedLoading(true)
@@ -168,68 +231,18 @@ const Dashboard = ({ minimized, setMinimized }) => {
             results = results.slice(0, 5)
             return results
         }
-        fetchJobs("NOT_QUEUED,QUEUED,SUBMITTED,PENDING,RUNNABLE,STARTING,RUNNING", false).then((results) => {
+        /*fetchJobs("NOT_QUEUED,QUEUED,SUBMITTED,PENDING,RUNNABLE,STARTING,RUNNING", false).then((results) => {
             setJobsInProgress(results)
-            //setJobsInProgressLoading(false)
+            setJobsInProgressLoading(false)
         })
         fetchJobs("FINISHED,SUCCEEDED,FAILED", false).then((results) => {
             setJobsCompleted(results)
-            //setJobsCompletedLoading(false)
+            setJobsCompletedLoading(false)
         })
         fetchJobs("NOT_QUEUED,QUEUED,FINISHED,SUBMITTED,PENDING,RUNNABLE,STARTING,RUNNING,SUCCEEDED,FAILED", true).then((results) => {
             setJobsShared(results)
-            //setJobsSharedLoading(false)
-        })
-
-        setTimeout(() => {
-            const inProgress = [
-                {
-                    name: "Demo job 1",
-                    status: "SUBMITTED"
-                },
-                {
-                    name: "Demo job 2",
-                    status: "RUNNING"
-                }
-            ]
-            setJobsInProgress(inProgress)
-
-            const completed = [
-                {
-                    name: "Demo job 3",
-                    status: "SUCCEEDED",
-                    number_of_simulations: 3,
-                    end_time: "2024-10-12T20:53:30.45"
-                },
-                {
-                    name: "Demo job 4",
-                    status: "SUCCEEDED",
-                    number_of_simulations: 10,
-                    end_time: "2024-10-12T20:53:30.45"
-                },
-                {
-                    name: "Demo job 5",
-                    status: "FAILED",
-                    number_of_simulations: 5,
-                    end_time: "2024-10-12T20:53:30.45"
-                }
-            ]
-            setJobsCompleted(completed)
-
-            const shared = [
-                {
-                    name: "Demo job 6",
-                    status: "SUCCEEDED",
-                    number_of_simulations: 7,
-                    start_time: "2024-10-12T20:53:30.45"
-                }
-            ]
-            setJobsShared(shared)
-
-            setJobsInProgressLoading(false)
-            setJobsCompletedLoading(false)
             setJobsSharedLoading(false)
-        }, 2000)
+        })*/
     }, [authToken])
 
     const filterInProgress = (job) => {
@@ -313,4 +326,4 @@ const Dashboard = ({ minimized, setMinimized }) => {
     )
 }
 
-export { Dashboard, LoadingRow }
+export { Dashboard, LoadingRow, truncate }

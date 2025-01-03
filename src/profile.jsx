@@ -56,7 +56,7 @@ const Profile = ({ minimized, setMinimized }) => {
         get("users/profile", authToken).then((user) => {
             setName(user.username)
             setEmail(user.email)
-            setColorNumber(user.color_id)
+            if (user.color_id) setColorNumber(user.color_id)
             if (usernameRef.current) usernameRef.current.value = user.username
             if (emailRef.current) emailRef.current.value = user.email
             setLoading(false)

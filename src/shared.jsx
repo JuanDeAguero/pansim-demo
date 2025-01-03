@@ -86,7 +86,23 @@ const Shared = ({ minimized, setMinimized }) => {
     }
 
     useEffect(() => {
-        updateJobs()
+        //updateJobs()
+
+        setTimeout(() => {
+            const shared = [
+                {
+                    id: 1,
+                    name: "Demo job 6",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 7,
+                    start_time: "2024-10-12T20:53:30.45"
+                }
+            ]
+            setJobs(shared)
+
+            setLoading(false)
+        }, 2000)
+
     }, [authToken, currentPage])
 
     return(

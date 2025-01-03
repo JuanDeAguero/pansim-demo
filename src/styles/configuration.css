@@ -28,7 +28,7 @@
     padding-bottom: 20px;
 }
 .config-root-file {
-    min-height: 100px;
+    padding-bottom: 25px;
 }
 .config-files-title, .config-root-file-title {
     background-color: transparent;
@@ -65,9 +65,9 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
-    width: 400px;
-    height: 120px;
+    width: 700px;
     position: relative;
+    padding-bottom: 20px;
 }
 .config-name-input {
     background-color: rgb(240, 240, 240);
@@ -138,4 +138,34 @@
     .config-title {
         margin-left: 50px;
     }
+}
+.config-description {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 700px;
+    position: relative;
+    padding-bottom: 25px;
+}
+.config-description-text {
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 1.4;
+    color: rgb(80, 80, 80);
+    white-space: pre-wrap;
+}
+.config-description-input {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    min-height: 80px;
+    padding: 10px;
+    margin-left: 20px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    width: calc(100% - 60px);
 }

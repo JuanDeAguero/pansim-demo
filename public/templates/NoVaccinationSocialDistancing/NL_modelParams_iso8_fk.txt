@@ -1,0 +1,128 @@
+% Number of simulations (only used if number of simulations is not specified in command line)
+1
+
+% Number of days in the outbreak
+200
+
+% Scenario name
+iso8_fk
+
+% Scenario description
+"Baseline scenario starting in September with perfect household bubbles of size 2 and no seasonal imports of people. Contact tracing is on, using exact pre-determined community contacts. Schools have a baseline risk factor adjustment of 0.8. 0% self-isolate."
+
+% Input directory; requires closing slash /data02/morPOP/data/ : /data/
+./
+
+% Output directory (not including scenario name folder); requires closing slash /data02/morPOP/output/vaccines/  /morLAB/morPOP/output/test/
+output/
+
+% File: Vaccine plan info
+scenarioParams_I5_sept_exact.txt
+
+% File: Exact outbreak details
+NL_exactOutbreak_noOutbreak.txt
+
+% File: Daily vaccination rates file
+NL_dailyVaccinationRates0.txt
+
+% File: Disease parameters
+NL_diseaseParams.txt
+
+% File: Population parameters
+NL_populationParams.txt
+
+% File: Population parameters
+NL_Age_Dissemination.txt
+
+% File: Dissemination Areas and Household Structures
+NL_HH_Structures.txt
+
+% File: Dissemination Household Sizes
+NL_HH_Dissemination_Sizes.txt
+
+% File: Household bubble sizes according to community
+NL_Community_Household_Bubbles_2perfect.txt
+
+% File: Infection imports rates according to community
+NL_Seasonal_Imports_NoImports.txt
+
+% File: Environment transmission rate adjustment according to community
+NL_environmentRiskAdjustment.txt
+
+% File: Routes taken by population according to dissemination area
+NL_subwayRoutes_disseminationAreas.txt
+
+% File: Transportation route data
+NL_routeData.txt
+
+% File: health parameters
+NL_healthParams_iso1.txt
+
+%File: ageContactDuration_hospital nurse
+NL_ageContactDuration_hospital_nurse.txt
+
+%File: ageContactDuration_hospitalPatient
+NL_ageContactDuration_hospitalPatient.txt
+
+%File: ageContactNumber_hospital.txt
+NL_ageContactNumber_hospital.txt
+
+%File: Hospital info
+NL_hospitalInfo.txt
+
+%File: Flu Centre info
+NL_fluCentreData.txt
+
+%File: vaccination destination in
+NL_vaccinationDestinations.txt
+
+%File: Primary Care Doctors information
+NL_primData.txt
+
+%File:All Schools with various attributes (level, name, school board)
+NL_Schools_All.txt
+
+%File: Junior School probabilities
+NL_Schools_Junior.txt
+
+%File: Intermediate School probabilities
+NL_Schools_Intermediate.txt
+
+%File: Senior School probabilities
+NL_Schools_Senior.txt
+
+%File: Mapping for dAUid to Census Division
+NL_Census_Division_Mapping.txt
+
+%File: Mapping for community (DA,CSD) to health authority
+NL_Community_RHA_Mapping.txt
+
+%File: Probabilities of there being a particular type of workplace for each community
+NL_Workplace_Type_by_Community.txt
+
+%File: Hazard rates for each work class
+NL_Work_Class_Hazard_Rates.txt
+
+%File: Office sizess for workplaces
+NL_Workplace_Office_Sizes.txt
+
+%File: Cumulative probabilities of there being a workplace in each community
+NL_Workplace_Probability_by_Community.txt
+
+%File: Probabilities of a commuter working in another region
+NL_Commuter_Distribution.txt
+
+%File: Matches a route to the destination
+NL_go_Transit_Route.txt
+
+%File: workplace imports by CSD and industry
+NL_Workplace_Imports_by_CSD_and_Industry_cumulative.txt
+
+%File: Prevalence of relevant comorbidities
+NL_comorbidityPrevalence.txt
+
+%File: Hazard ratio according to age
+NL_hazardRatio-Age.txt
+
+%File: Hazard ratio according to comorbidity
+NL_hazardRatio-Comorbidity.txt

@@ -1,3 +1,4 @@
+import "./styles/app.css"
 import { AuthProvider } from "./auth"
 import { BrowserRouter } from "react-router-dom"
 import { Dashboard } from "./dashboard"
@@ -7,6 +8,7 @@ import { Route } from "react-router-dom"
 import { Routes } from "react-router-dom"
 import { Simulations } from "./simulations"
 import { useAuth } from "./auth"
+import { useEffect } from "react"
 import { useState } from "react"
 import Analytics from "./analytics"
 import Configuration from "./configuration"
@@ -33,9 +35,21 @@ const AuthenticatedApp = () => {
     const [configEditMode, setConfigEditMode] = useState(false)
     const [minimized, setMinimized] = useState(false)
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1050)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1000);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize)
+        };
+    }, [])
+
     return(
     <>
-      <div className="demo">This is a DEMO version of PanSim.</div>
+      {!isMobile ? <>
       <Nav minimized={minimized} setMinimized={setMinimized} />
       <Routes>
         <Route path="/" element={<Dashboard minimized={minimized} setMinimized={setMinimized} />} />
@@ -48,6 +62,7 @@ const AuthenticatedApp = () => {
         <Route path="/new-simulation" element={<NewSimulation minimized={minimized} setMinimized={setMinimized} />} />
         <Route path="/profile" element={<Profile minimized={minimized} setMinimized={setMinimized} />} />
       </Routes>
+      </> : <div className="not-available">PanSim is not currently supported at this screen resolution.</div>}
     </>
     )
 }

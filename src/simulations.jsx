@@ -7,13 +7,14 @@ import { PulseLoader } from "react-spinners"
 import { Table } from "./table"
 import { TableElement } from "./table"
 import { TableRow } from "./table"
+import { truncate } from "./dashboard"
 import { useAuth } from "./auth"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 const statusColors = {
-    "QUEUED": "rgb(200, 200, 200)",
+    "QUEUED": "rgb(190, 190, 190)",
     "FAILED": "rgb(255, 142, 142)",
     "SUCCEEDED": "rgb(127, 205, 127)"
 }
@@ -87,7 +88,7 @@ const SimulationCompleted = ({ job }) => {
     <TableRow>
       <TableElement>
         <div className="sims-sim-name-wrapper">
-          <div>{job.name}</div>
+          <div>{truncate(job.name, 20)}</div>
           <div className="sims-sim-name-instances">{job.number_of_simulations} instances</div>
         </div>
       </TableElement>
@@ -161,7 +162,114 @@ const Simulations = ({ minimized, setMinimized }) => {
     const { authToken } = useAuth()
 
     useEffect(() => {
-        setInProgressLoading(true)
+
+        setTimeout(() => {
+            const inProgress = [
+                {
+                    id: 1,
+                    name: "Demo job 1",
+                    status: "SUBMITTED",
+                    start_time: "2024-10-12T20:53:30.45",
+                    number_of_simulations: 3
+                },
+                {
+                    id: 1,
+                    name: "Demo job 2",
+                    status: "RUNNING",
+                    start_time: "2024-10-12T20:53:30.45",
+                    number_of_simulations: 2
+                }
+            ]
+            setJobsInProgress(inProgress)
+
+            const completed = [
+                {
+                    id: 1,
+                    name: "Demo job 3",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 3,
+                    end_time: "2024-10-12T20:53:30.45"
+                },
+                {
+                    id: 1,
+                    name: "Demo job 4",
+                    status: "SUCCEEDED",
+                    number_of_simulations: 10,
+                    end_time: "2024-10-12T20:53:30.45"
+                },
+                {
+                    id: 1,
+                    name: "Demo job 5",
+                    status: "FAILED",
+                    number_of_simulations: 5,
+                    end_time: "2024-10-12T20:53:30.45"
+                }
+            ]
+            setJobsCompleted(completed)
+
+            setInProgressLoading(false)
+            setCompletedLoading(false)
+
+            setTotalCompletedSimulations(6)
+        }, 2000)
+
+    }, [])
+
+    useEffect(() => {
+
+        setCompletedLoading(true)
+
+        setTimeout(() => {
+
+            if (currentCompletedPage == 1) {
+                const completed = [
+                    {
+                        id: 1,
+                        name: "Demo job 3",
+                        status: "SUCCEEDED",
+                        number_of_simulations: 3,
+                        end_time: "2024-10-12T20:53:30.45"
+                    },
+                    {
+                        id: 1,
+                        name: "Demo job 4",
+                        status: "SUCCEEDED",
+                        number_of_simulations: 10,
+                        end_time: "2024-10-12T20:53:30.45"
+                    },
+                    {
+                        id: 1,
+                        name: "Demo job 5",
+                        status: "FAILED",
+                        number_of_simulations: 5,
+                        end_time: "2024-10-12T20:53:30.45"
+                    },
+                    {
+                        id: 1,
+                        name: "Demo job 5",
+                        status: "FAILED",
+                        number_of_simulations: 5,
+                        end_time: "2024-10-12T20:53:30.45"
+                    }
+                ]
+                setJobsCompleted(completed)
+                setCompletedLoading(false)
+            } else {
+                const completed = [
+                    {
+                        id: 1,
+                        name: "Demo job 7",
+                        status: "SUCCEEDED",
+                        number_of_simulations: 5,
+                        end_time: "2024-10-12T20:53:30.45"
+                    }
+                ]
+                setJobsCompleted(completed)
+                setCompletedLoading(false)
+            }
+        }, 2000)
+
+        /*setInProgressLoading(true)
         setJobsInProgress([])
         const params = {
             "page": currentInProgressPage,
@@ -172,11 +280,11 @@ const Simulations = ({ minimized, setMinimized }) => {
             setJobsInProgress(data.results)
             setTotalInProgressSimulations(data.count)
             setInProgressLoading(false)
-        })
-    }, [authToken, currentInProgressPage])
+        })*/
+    }, [currentCompletedPage])
 
 
-    useEffect(() => {
+    /*useEffect(() => {
         setCompletedLoading(true)
         setJobsCompleted([])
         const params = {
@@ -189,12 +297,12 @@ const Simulations = ({ minimized, setMinimized }) => {
             setTotalCompletedSimulations(data.count)
             setCompletedLoading(false)
         })
-    }, [authToken, currentCompletedPage])
+    }, [authToken, currentCompletedPage])*/
 
     const [searched, setSearched] = useState(false)
 
     const search = () => {
-        setSearchLoading(true)
+        /*setSearchLoading(true)
         setJobsSearch([])
         const params = {
             "page": currentSearchPage,
@@ -205,12 +313,12 @@ const Simulations = ({ minimized, setMinimized }) => {
             setJobsSearch(data.results)
             setTotalSearchSimulations(data.count)
             setSearchLoading(false)
-        })
+        })*/
     }
 
     const onSearchClick = () => {
-        setSearched(true)
-        search()
+        //setSearched(true)
+        //search()
     }
 
     return(

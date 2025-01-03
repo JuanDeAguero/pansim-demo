@@ -103,17 +103,18 @@
     margin-right: 20px;
 }
 .custom-button {
-    background-color: rgb(161, 183, 224);
+    background-color: rgb(120, 160, 234);
     border-radius: 15px;
     display: flex;
     font-size: 14px;
-    height: 30px;
+    height: 30px; 
     justify-content: center;
     padding-left: 25px;
     padding-right: 25px;
+    position: relative;
 }
 .custom-button:hover {
-    background-color: rgb(153, 174, 214);
+    background-color: rgb(146, 178, 236);
 }
 .custom-button * {
     color: white;
@@ -122,15 +123,40 @@
 .custom-button-loader {
     transform: scale(60%);
 }
+
+
+.custom-button:disabled {
+    pointer-events: none;
+}
+button:disabled {
+    pointer-events: none;
+}
+
+
 .new-sim-param {
-    align-items: center;
     background-color: transparent;
     display: flex;
-    height: 55px;
     justify-content: space-between;
     margin-left: 20px;
     overflow: visible;
     width: calc(100% - 40px);
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 5px;
+    min-height: 40px;
+    height: auto;
+}
+.new-sim-input-textarea {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    min-height: 80px;
+    padding: 10px;
+    width: 300px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+    margin-top: 5px;
+    margin-bottom: 10px
 }
 .new-sim-input-text {
     background-color: rgb(240, 240, 240);
@@ -181,4 +207,32 @@
 }
 .success-message {
     background-color: rgb(127, 205, 127);
+}
+.create-config-mode {
+    background-color: transparent;
+    display: flex;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+    height: 60px;
+}
+.new-sim-param-description {
+    margin-bottom: 5px;
+}
+.new-config-templates {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.new-config-template {
+    margin-bottom: 0px;
+}
+.new-config-template-name {
+    margin-bottom: 5px;
+}
+.new-config-template-desc {
+    color: gray;
+    margin-bottom: 10px;
 }

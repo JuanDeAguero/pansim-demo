@@ -3,9 +3,6 @@
     justify-content: center;
     margin-left: 300px;
     width: calc(100% - 300px);
-    position: fixed;
-    top: 50px;
-    height: calc(100% - 50px);
 }
 .page-wrapper-minimized {
     margin-left: 85px;
@@ -14,6 +11,7 @@
 .page {
     width: 1000px;
     overflow: visible;
+    padding-left: 10px;
 }
 @media only screen and (min-width: 1000px) and (max-width: 1300px) {
     .page-wrapper {

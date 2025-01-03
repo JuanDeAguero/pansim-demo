@@ -45,6 +45,8 @@ const LineChart = ({ data, params, width, height, data25, data75 }) => {
 
         if (!data) return
 
+        data = [...data].sort((a, b) => a.day - b.day)
+
         const svg = d3.select(svgRef.current)
         const margin = { top: 20, right: 20, bottom: 30, left: 60 }
         const adjustedWidth = width - margin.left - margin.right
@@ -202,16 +204,18 @@ const Results = ({ resultType, data, numSimulations, loading, update, data25, da
           onClick={() => setSelectedMode("custom")}>
             Custom
         </button>
-        <button className="sim-results-mode"
-          style={{ backgroundColor: selectedMode === "median" ? "rgb(220, 220, 220)" : "" }}
-          onClick={() => setSelectedMode("median")}>
-            Median
-        </button>
-        <button className="sim-results-mode"
-          style={{ backgroundColor: selectedMode === "average" ? "rgb(220, 220, 220)" : "" }}
-          onClick={() => { setSelectedMode("average") } }>
-            Average
-        </button>
+        {resultType === "Population" ? <>
+            <button className="sim-results-mode"
+            style={{ backgroundColor: selectedMode === "median" ? "rgb(220, 220, 220)" : "" }}
+            onClick={() => setSelectedMode("median")}>
+                Median
+            </button>
+            <button className="sim-results-mode"
+            style={{ backgroundColor: selectedMode === "average" ? "rgb(220, 220, 220)" : "" }}
+            onClick={() => { setSelectedMode("average") } }>
+                Average
+            </button>
+        </> : null}
       </div>
       {selectedMode === "custom" && <div className="sim-results-numbers">
         <div className="sim-results-number">
@@ -255,7 +259,15 @@ const Logs = ({ id, authToken }) => {
     const [loading, setLoading] = useState(true)
 
     const fetchLogs = async () => {
-        setLoading(true)
+
+        setTimeout(() => {
+
+            setLoading(false)
+
+        }, 2000)
+
+        
+        /*setLoading(true)
         setLogs([])
         get("job/" + String(id), authToken).then(async (job) => {
             try {
@@ -353,7 +365,7 @@ const Logs = ({ id, authToken }) => {
                 console.error("Error fetching logs: ", error)
             }
             setLoading(false)
-        })
+        })*/
     }
 
     useEffect(() => {
@@ -483,7 +495,7 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
     }
 
     const updateJob = () => {
-        setJobLoading(true)
+        /*setJobLoading(true)
         get("job/" + String(id), authToken).then((job) => {
             setJob(job)
             setJobName(job.name)
@@ -497,25 +509,39 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
                 setRootFileUrl(config.root_file.file)
                 setConfigLoading(false)
             })
-        })
+        })*/
     }
 
     useEffect(() => {
 
-        updatePopulationData(0, "custom")
+        setTimeout(() => {
+
+            setJobStatus("SUCCEEDED")
+
+            setConfigName("Config 1")
+            setRootFileName("base_root.txt")
+
+            setJobLoading(false)
+            setConfigLoading(false)
+            setHealthAuthorityDataLoading(false)
+            setPopulationDataLoading(false)
+
+        }, 2000)
+
+        /*updatePopulationData(0, "custom")
         updateHealthAuthorityData(0, 0, "custom")
         updateHomeCommunityData(0, 1, "custom")
 
-        updateJob()
+        updateJob()*/
 
     }, [id, authToken])
 
     const navigate = useNavigate()
 
     const onOpenConfigClick = () => {
-        if (configLoading || !config) return
+        /*if (configLoading || !config) return
         setConfigEditMode(false)
-        navigate("/configurations/" + config.id)
+        navigate("/configurations/" + config.id)*/
     }
 
     const [downloading, setDownloading] = useState(false)
@@ -534,6 +560,15 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
                 vaccinated: rates.vaccinated
             }))
         }).flat()
+        
+        array.sort((a, b) => {
+            if (a.num_sim !== b.num_sim) {
+                return a.num_sim - b.num_sim
+            } else {
+                return a.num_day - b.num_day
+            }
+        })
+
         const header = "num_sim,num_day,dead,hospitalized,infectious,removed,susceptible,vaccinated\n"
         const csvRows = array.map(row => `${row.num_sim},${row.num_day},${row.dead},${row.hospitalized},${row.infectious},${row.removed},${row.susceptible},${row.vaccinated}`).join("\n")
         return header + csvRows
@@ -557,6 +592,17 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
                 }))
             })
         }).flat()
+
+        array.sort((a, b) => {
+            if (a.num_sim !== b.num_sim) {
+                return a.num_sim - b.num_sim
+            } else if (a.health_authority_id !== b.health_authority_id) {
+                return a.health_authority_id - b.health_authority_id
+            } else {
+                return a.num_day - b.num_day
+            }
+        })
+
         const header = "num_sim,num_day,health_authority_id,dead,hospitalized,infectious,recovered,removed,susceptible,vaccinated\n"
         const csvRows = array.map(row => `${row.num_sim},${row.num_day},${row.health_authority_id},${row.dead},${row.hospitalized},${row.infectious},${row.recovered},${row.removed},${row.susceptible},${row.vaccinated}`).join("\n")
         return header + csvRows
@@ -778,7 +824,7 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
           </div>
           <div className="sim-share-buttons">
             <button className="sim-share-button" onClick={onAllowViewClick}>Allow View</button>
-            <button className="sim-share-button" onClick={onAllowEditClick}>Allow Edit</button>
+            {false && <button className="sim-share-button" onClick={onAllowEditClick}>Allow Edit</button>}
             <button className="sim-share-button sim-share-button-red" onClick={onRemoveAccessClick}>Remove Access</button>
           </div>
           {userToEdit && <div className="sim-share-selected">Selected user: {userToEdit.username}</div>}

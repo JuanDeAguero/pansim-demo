@@ -1,5 +1,6 @@
 import "./styles/nav.css"
 import { Link } from "react-router-dom"
+import { useApi } from "./requests"
 import { useAuth } from "./auth"
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
@@ -8,6 +9,8 @@ import { useRef } from "react"
 import { useState } from "react"
 
 const Nav = ({ minimized, setMinimized }) => {
+
+    const { get } = useApi()
 
     const dashboardBtn =      useRef(null)
     const simulationsBtn =    useRef(null)
@@ -69,7 +72,7 @@ const Nav = ({ minimized, setMinimized }) => {
       <button className={minimized ? "nav-close-minimized" : "nav-close"} onClick={() => setMinimized(true)}>
         <span className="material-symbols-outlined">close</span>
       </button>
-      <div className="nav-title">{!minimized && "PanSim demo"}</div>
+      <div className="nav-title">{!minimized && "PanSim DEMO"}</div>
       <div className={minimized ? "nav-buttons-minimized" : "nav-buttons"}>
         <div>
           <Link className={minimized ? "nav-button-minimized" : "nav-button"} ref={dashboardBtn} to="/" onClick={onNavButtonClick}>

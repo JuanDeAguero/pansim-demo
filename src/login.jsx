@@ -8,6 +8,10 @@ const Login = () => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [repeatPassword, setRepeatPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [accessToken, setAccessToken] = useState("")
+
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
@@ -34,18 +38,46 @@ const Login = () => {
     const onSignUpClick = () => {
         setError("")
         setLoading(true)
-        setError("Error: Invalid access token")
-        setLoading(false)
+
+        if (accessToken != "A1B2C3") {
+            setError("Error: Invalid access token")
+            setLoading(false)
+            return
+        }
+
+        const formData = new FormData()
+        formData.append("username", username)
+        formData.append("password", password)
+        formData.append("password2", repeatPassword)
+        formData.append("email", email)
+        post("users/register", null, formData).then(() => {
+
+            post("api/token/", authToken, formData).then((data) => {
+                login(data.access)
+                setLoading(false)
+            }).catch(() => {
+                setError("Error: Can't login with new user")
+                setLoading(false)
+            })
+            
+        }).catch((error) => {
+            setError("Error: Invalid user info")
+            setLoading(false)
+        })
     }
 
     const onCreateAccountClick = () => {
         setLoggingIn(false)
         setError("")
+        setUsername("")
+        setPassword("")
     }
 
     const onCreateBackClick = () => {
         setLoggingIn(true)
         setError("")
+        setUsername("")
+        setPassword("")
     }
 
     return (
@@ -75,12 +107,12 @@ const Login = () => {
             onChange={(event) => setUsername(event.target.value)} />
           <input className="login-input" type="password" placeholder="Password" value={password}
             onChange={(event) => setPassword(event.target.value)} />
-          <input className="login-input" type="password" placeholder="Repeat password" value={password}
-            onChange={(event) => setPassword(event.target.value)} />
-          <input className="login-input" type="text" placeholder="Email" value={password}
-            onChange={(event) => setPassword(event.target.value)} />
-          <input className="login-input" type="password" placeholder="Access token" value={password}
-            onChange={(event) => setPassword(event.target.value)} />
+          <input className="login-input" type="password" placeholder="Repeat password" value={repeatPassword}
+            onChange={(event) => setRepeatPassword(event.target.value)} />
+          <input className="login-input" type="text" placeholder="Email" value={email}
+            onChange={(event) => setEmail(event.target.value)} />
+          <input className="login-input" type="password" placeholder="Access token" value={accessToken}
+            onChange={(event) => setAccessToken(event.target.value)} />
           <Button onClick={onSignUpClick} extraStyle="login-button" loading={loading}>
             <div>SIGN UP</div>
           </Button>

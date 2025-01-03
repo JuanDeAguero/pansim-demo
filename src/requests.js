@@ -1,3 +1,35 @@
+import { useAuth } from "./auth"
+import { useNavigate } from "react-router-dom"
+
+const useApi = () => {
+
+    const { authToken, logout } = useAuth()
+    const navigate = useNavigate()
+
+    const get = async (url, authToken, params) => {
+        try {
+            let fullUrl = process.env.REACT_APP_DJANGO_SERVER_URL + url
+            if (params) fullUrl = fullUrl + "?" + new URLSearchParams(params).toString()
+            const response = await fetch(fullUrl, {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${authToken}` }
+            })
+            const data = await response.json()
+            if (response.ok) return data
+            else if (response.status === 401) {
+                navigate("/")
+                logout()
+                throw new Error("Unauthorized request")
+            }
+            else throw new Error(data.error)
+        }
+        catch(error) {
+            throw error
+        }
+    }
+
+    return { get };
+};
 
 const get = async (url, authToken, params) => {
     try {
@@ -9,6 +41,9 @@ const get = async (url, authToken, params) => {
         })
         const data = await response.json()
         if (response.ok) return data
+        else if (response.status === 401) {
+            throw new Error("Unauthorized request")
+        }
         else throw new Error(data.error)
     }
     catch(error) {
@@ -20,7 +55,7 @@ const post = async (url, authToken, formData) => {
     try {
         const response = await fetch(process.env.REACT_APP_DJANGO_SERVER_URL + url, {
             method: "POST",
-            headers: { "Authorization": `Bearer ${authToken}` },
+            headers: authToken ? { "Authorization": `Bearer ${authToken}` } : {},
             body: formData
         })
         const data = await response.json()
@@ -59,4 +94,4 @@ const update = async (url, authToken, formData) => {
     }
 }
 
-export { get, post, del, update }
+export { get, post, del, update, useApi }

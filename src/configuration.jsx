@@ -76,8 +76,11 @@ const Configuration = ({ configEditMode, setConfigEditMode, minimized, setMinimi
     const fileInputRef = useRef(null)
 
     const nameRef = useRef(null)
+    const descriptionRef = useRef(null)
 
     const { authToken } = useAuth()
+
+    const [description, setDescription] = useState("")
 
     const fetchConfig = () => {
         searchRef.current.value = ""
@@ -87,6 +90,7 @@ const Configuration = ({ configEditMode, setConfigEditMode, minimized, setMinimi
             setConfig(config)
             setRootFile(config.root_file)
             setFiles(config.files)
+            setDescription(config.description || "")
             setLoading(false)
         })
     }
@@ -96,8 +100,12 @@ const Configuration = ({ configEditMode, setConfigEditMode, minimized, setMinimi
     }, [id, authToken])
 
     useEffect(() => {
-        if (!config || !nameRef || !nameRef.current) return
+        if (!config || !nameRef || !nameRef.current || !descriptionRef || !descriptionRef.current) return
         nameRef.current.value = config.scenario_name
+        if (config.description) {
+            descriptionRef.current.value = config.description
+            setDescription(config.description)
+        }
     }, [config, configEditMode])
 
     const onEditClick = () => {
@@ -130,6 +138,7 @@ const Configuration = ({ configEditMode, setConfigEditMode, minimized, setMinimi
         setSaveLoading(true)
         const formData = new FormData()
         formData.append("scenario_name", nameRef.current.value)
+        formData.append("description", descriptionRef.current.value)
         update(`job-config/${id}`, authToken, formData).then((response) => {
             const formData = new FormData()
             if (newRootFile) {
@@ -242,6 +251,18 @@ const Configuration = ({ configEditMode, setConfigEditMode, minimized, setMinimi
       {configEditMode && <div className="config-change-name">
         <div className="config-files-title">Change Name</div>
         <input className="config-name-input" ref={nameRef} placeholder="Name" />
+        <div className="config-files-title">Description</div>
+        <textarea 
+          className="config-description-input" 
+          ref={descriptionRef} 
+          placeholder="Description" 
+        />
+      </div>}
+      {!configEditMode && <div className="config-description">
+        <div className="config-files-title">Description</div>
+        <div className="config-description-text">
+          {description || ""}
+        </div>
       </div>}
       <div className="config-root-file">
         <div className="config-files-title">Root File</div>
