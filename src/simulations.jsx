@@ -246,7 +246,7 @@ const Simulations = ({ minimized, setMinimized }) => {
                     },
                     {
                         id: 1,
-                        name: "Demo job 5",
+                        name: "Demo job",
                         status: "FAILED",
                         number_of_simulations: 5,
                         end_time: "2024-10-12T20:53:30.45"

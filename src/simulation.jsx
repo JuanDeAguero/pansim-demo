@@ -165,7 +165,7 @@ const Results = ({ resultType, data, numSimulations, loading, update, data25, da
 
     const [selectedInst, setSelectedInst] = useState(0)
     const [selectedId, setSelectedId] = useState(0)
-    const [selectedParams, setSelectedParams] = useState(["Susceptible"])
+    const [selectedParams, setSelectedParams] = useState(["Infectious", "Dead", "Vaccinated", "Hospitalized"])
 
     const toggleParam = (param) => {
         setSelectedParams(prev => {
@@ -180,18 +180,20 @@ const Results = ({ resultType, data, numSimulations, loading, update, data25, da
     const [selectedMode, setSelectedMode] = useState("custom")
 
     const onRefreshClick = useCallback(() => {
-        if (resultType === "Population") {
+        /*if (resultType === "Population") {
             update(selectedInst, selectedMode)
         } else if (resultType === "Health Authority") {
             update(selectedInst, selectedId, selectedMode)
         } else if (resultType === "Home Community") {
             update(selectedInst, selectedId, selectedMode)
-        }
+        }*/
     }, [selectedInst, selectedId, selectedMode])
 
     useEffect(() => {
         if (resultType === "Home Community") {
             setSelectedId(1)
+        } else if (resultType === "Health Authority") {
+            setSelectedParams(["Susceptible"])
         }
     }, [selectedMode])
 
@@ -237,7 +239,7 @@ const Results = ({ resultType, data, numSimulations, loading, update, data25, da
       </div>}
       <div className="sim-filters">
         {params.map((param) =>
-          <Filter key={param} param={param} checked={selectedParams.includes(param)}
+          <Filter key={param} param={param} checked={(resultType === "Population" && (param === "Infectious" || param === "Dead" || param === "Vaccinated" || param === "Hospitalized")) || (resultType === "Health Authority" && param === "Susceptible")}
             onToggle={toggleParam} />)}
       </div>
       <Button onClick={onRefreshClick} extraStyle={"sim-refresh-button"} loading={loading}>
@@ -261,6 +263,51 @@ const Logs = ({ id, authToken }) => {
     const fetchLogs = async () => {
 
         setTimeout(() => {
+
+            setLogs([
+                {
+                    message: "Process completed successfully."
+                },
+                {
+                    message: "Successfully saved data."
+                },
+                {
+                    message: "Saving the data to the database"
+                },
+                {
+                    message: "Running the aggregator"
+                },
+                {
+                    message: "1239164kB"
+                },
+                {
+                    message: "Rank 1 - CPU time: 98 sec, Memory usage: Rank 0 - CPU time: 98 sec, Memory usage: 21480kB"
+                },
+                {
+                    message: "Simulation Finished"
+                },
+                {
+                    message: "Simulation data cleared"
+                },
+                {
+                    message: "Clearing the simulation data"
+                },
+                {
+                    message: "TIME to record files: 0s (0min)"
+                },
+                {
+                    message: "Recording school statistics"
+                },
+                {
+                    message: "Recording general statistics"
+                },
+                {
+                    message: "TIME to run the simulation: 96s (1.6min)"
+                },
+                {
+                    message: "..."
+                }
+            ])
 
             setLoading(false)
 
@@ -521,6 +568,706 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
             setConfigName("Config 1")
             setRootFileName("base_root.txt")
 
+            const data =
+                [
+                    {
+                        "day": 0,
+                        "susceptible": 506287,
+                        "infectious": 989,
+                        "dead": 0,
+                        "vaccinated": 234,
+                        "hospitalized": 0,
+                        "removed": 0
+                    },
+                    {
+                        "day": 1,
+                        "susceptible": 506117,
+                        "infectious": 840,
+                        "dead": 319,
+                        "vaccinated": 468,
+                        "hospitalized": 0,
+                        "removed": 0
+                    },
+                    {
+                        "day": 2,
+                        "susceptible": 505950,
+                        "infectious": 940,
+                        "dead": 386,
+                        "vaccinated": 702,
+                        "hospitalized": 0,
+                        "removed": 0
+                    },
+                    {
+                        "day": 3,
+                        "susceptible": 505769,
+                        "infectious": 1054,
+                        "dead": 453,
+                        "vaccinated": 936,
+                        "hospitalized": 0,
+                        "removed": 0
+                    },
+                    {
+                        "day": 4,
+                        "susceptible": 505577,
+                        "infectious": 1171,
+                        "dead": 528,
+                        "vaccinated": 1170,
+                        "hospitalized": 0,
+                        "removed": 0
+                    },
+                    {
+                        "day": 5,
+                        "susceptible": 505372,
+                        "infectious": 1307,
+                        "dead": 597,
+                        "vaccinated": 1404,
+                        "hospitalized": 7,
+                        "removed": 0
+                    },
+                    {
+                        "day": 6,
+                        "susceptible": 505121,
+                        "infectious": 1482,
+                        "dead": 673,
+                        "vaccinated": 1638,
+                        "hospitalized": 7,
+                        "removed": 0
+                    },
+                    {
+                        "day": 7,
+                        "susceptible": 504819,
+                        "infectious": 1660,
+                        "dead": 797,
+                        "vaccinated": 1872,
+                        "hospitalized": 10,
+                        "removed": 0
+                    },
+                    {
+                        "day": 8,
+                        "susceptible": 504498,
+                        "infectious": 1871,
+                        "dead": 907,
+                        "vaccinated": 2106,
+                        "hospitalized": 11,
+                        "removed": 0
+                    },
+                    {
+                        "day": 9,
+                        "susceptible": 504164,
+                        "infectious": 2043,
+                        "dead": 1069,
+                        "vaccinated": 2340,
+                        "hospitalized": 13,
+                        "removed": 0
+                    },
+                    {
+                        "day": 10,
+                        "susceptible": 503797,
+                        "infectious": 2251,
+                        "dead": 1228,
+                        "vaccinated": 2574,
+                        "hospitalized": 14,
+                        "removed": 0
+                    },
+                    {
+                        "day": 11,
+                        "susceptible": 503421,
+                        "infectious": 2378,
+                        "dead": 1371,
+                        "vaccinated": 2808,
+                        "hospitalized": 15,
+                        "removed": 106
+                    },
+                    {
+                        "day": 12,
+                        "susceptible": 503033,
+                        "infectious": 2516,
+                        "dead": 1506,
+                        "vaccinated": 3042,
+                        "hospitalized": 17,
+                        "removed": 221
+                    },
+                    {
+                        "day": 13,
+                        "susceptible": 502619,
+                        "infectious": 2627,
+                        "dead": 1673,
+                        "vaccinated": 3276,
+                        "hospitalized": 18,
+                        "removed": 357
+                    },
+                    {
+                        "day": 14,
+                        "susceptible": 502195,
+                        "infectious": 2729,
+                        "dead": 1840,
+                        "vaccinated": 3510,
+                        "hospitalized": 19,
+                        "removed": 512
+                    },
+                    {
+                        "day": 15,
+                        "susceptible": 501747,
+                        "infectious": 2809,
+                        "dead": 2037,
+                        "vaccinated": 3744,
+                        "hospitalized": 18,
+                        "removed": 683
+                    },
+                    {
+                        "day": 16,
+                        "susceptible": 501287,
+                        "infectious": 2963,
+                        "dead": 2259,
+                        "vaccinated": 3978,
+                        "hospitalized": 22,
+                        "removed": 767
+                    },
+                    {
+                        "day": 17,
+                        "susceptible": 500802,
+                        "infectious": 3125,
+                        "dead": 2463,
+                        "vaccinated": 4212,
+                        "hospitalized": 23,
+                        "removed": 886
+                    },
+                    {
+                        "day": 18,
+                        "susceptible": 500281,
+                        "infectious": 3342,
+                        "dead": 2653,
+                        "vaccinated": 4446,
+                        "hospitalized": 23,
+                        "removed": 1000
+                    },
+                    {
+                        "day": 19,
+                        "susceptible": 499731,
+                        "infectious": 3509,
+                        "dead": 2903,
+                        "vaccinated": 4680,
+                        "hospitalized": 22,
+                        "removed": 1133
+                    },
+                    {
+                        "day": 20,
+                        "susceptible": 499167,
+                        "infectious": 3686,
+                        "dead": 3111,
+                        "vaccinated": 4914,
+                        "hospitalized": 20,
+                        "removed": 1312
+                    },
+                    {
+                        "day": 21,
+                        "susceptible": 498563,
+                        "infectious": 3957,
+                        "dead": 3290,
+                        "vaccinated": 5148,
+                        "hospitalized": 22,
+                        "removed": 1466
+                    },
+                    {
+                        "day": 22,
+                        "susceptible": 497916,
+                        "infectious": 4199,
+                        "dead": 3523,
+                        "vaccinated": 5382,
+                        "hospitalized": 20,
+                        "removed": 1638
+                    },
+                    {
+                        "day": 23,
+                        "susceptible": 497258,
+                        "infectious": 4465,
+                        "dead": 3730,
+                        "vaccinated": 5616,
+                        "hospitalized": 23,
+                        "removed": 1823
+                    },
+                    {
+                        "day": 24,
+                        "susceptible": 496531,
+                        "infectious": 4758,
+                        "dead": 3968,
+                        "vaccinated": 5850,
+                        "hospitalized": 26,
+                        "removed": 2019
+                    },
+                    {
+                        "day": 25,
+                        "susceptible": 495764,
+                        "infectious": 5018,
+                        "dead": 4239,
+                        "vaccinated": 6084,
+                        "hospitalized": 30,
+                        "removed": 2255
+                    },
+                    {
+                        "day": 26,
+                        "susceptible": 494983,
+                        "infectious": 5239,
+                        "dead": 4594,
+                        "vaccinated": 6318,
+                        "hospitalized": 26,
+                        "removed": 2460
+                    },
+                    {
+                        "day": 27,
+                        "susceptible": 494121,
+                        "infectious": 5463,
+                        "dead": 4995,
+                        "vaccinated": 6552,
+                        "hospitalized": 28,
+                        "removed": 2697
+                    },
+                    {
+                        "day": 28,
+                        "susceptible": 493223,
+                        "infectious": 5826,
+                        "dead": 5270,
+                        "vaccinated": 6786,
+                        "hospitalized": 33,
+                        "removed": 2957
+                    },
+                    {
+                        "day": 29,
+                        "susceptible": 492247,
+                        "infectious": 6138,
+                        "dead": 5678,
+                        "vaccinated": 7020,
+                        "hospitalized": 36,
+                        "removed": 3213
+                    },
+                    {
+                        "day": 30,
+                        "susceptible": 491315,
+                        "infectious": 6323,
+                        "dead": 6151,
+                        "vaccinated": 7254,
+                        "hospitalized": 37,
+                        "removed": 3487
+                    },
+                    {
+                        "day": 31,
+                        "susceptible": 490327,
+                        "infectious": 6522,
+                        "dead": 6652,
+                        "vaccinated": 7488,
+                        "hospitalized": 35,
+                        "removed": 3775
+                    },
+                    {
+                        "day": 32,
+                        "susceptible": 489304,
+                        "infectious": 6777,
+                        "dead": 7121,
+                        "vaccinated": 7722,
+                        "hospitalized": 30,
+                        "removed": 4074
+                    },
+                    {
+                        "day": 33,
+                        "susceptible": 488205,
+                        "infectious": 6960,
+                        "dead": 7686,
+                        "vaccinated": 7956,
+                        "hospitalized": 31,
+                        "removed": 4425
+                    },
+                    {
+                        "day": 34,
+                        "susceptible": 487166,
+                        "infectious": 6881,
+                        "dead": 8486,
+                        "vaccinated": 8190,
+                        "hospitalized": 27,
+                        "removed": 4743
+                    },
+                    {
+                        "day": 35,
+                        "susceptible": 486143,
+                        "infectious": 7240,
+                        "dead": 8840,
+                        "vaccinated": 8424,
+                        "hospitalized": 29,
+                        "removed": 5053
+                    },
+                    {
+                        "day": 36,
+                        "susceptible": 485109,
+                        "infectious": 7467,
+                        "dead": 9299,
+                        "vaccinated": 8658,
+                        "hospitalized": 34,
+                        "removed": 5401
+                    },
+                    {
+                        "day": 37,
+                        "susceptible": 484054,
+                        "infectious": 7543,
+                        "dead": 9929,
+                        "vaccinated": 8892,
+                        "hospitalized": 31,
+                        "removed": 5750
+                    },
+                    {
+                        "day": 38,
+                        "susceptible": 482945,
+                        "infectious": 7824,
+                        "dead": 10385,
+                        "vaccinated": 9126,
+                        "hospitalized": 33,
+                        "removed": 6122
+                    },
+                    {
+                        "day": 39,
+                        "susceptible": 481780,
+                        "infectious": 8096,
+                        "dead": 10887,
+                        "vaccinated": 9360,
+                        "hospitalized": 37,
+                        "removed": 6513
+                    },
+                    {
+                        "day": 40,
+                        "susceptible": 480589,
+                        "infectious": 8403,
+                        "dead": 11362,
+                        "vaccinated": 9594,
+                        "hospitalized": 46,
+                        "removed": 6922
+                    },
+                    {
+                        "day": 41,
+                        "susceptible": 479429,
+                        "infectious": 8616,
+                        "dead": 11845,
+                        "vaccinated": 9828,
+                        "hospitalized": 47,
+                        "removed": 7386
+                    },
+                    {
+                        "day": 42,
+                        "susceptible": 478246,
+                        "infectious": 8939,
+                        "dead": 12271,
+                        "vaccinated": 10062,
+                        "hospitalized": 50,
+                        "removed": 7820
+                    },
+                    {
+                        "day": 43,
+                        "susceptible": 476954,
+                        "infectious": 9272,
+                        "dead": 12772,
+                        "vaccinated": 10296,
+                        "hospitalized": 51,
+                        "removed": 8278
+                    },
+                    {
+                        "day": 44,
+                        "susceptible": 475603,
+                        "infectious": 9462,
+                        "dead": 13418,
+                        "vaccinated": 10530,
+                        "hospitalized": 53,
+                        "removed": 8793
+                    },
+                    {
+                        "day": 45,
+                        "susceptible": 474218,
+                        "infectious": 9904,
+                        "dead": 13843,
+                        "vaccinated": 10764,
+                        "hospitalized": 63,
+                        "removed": 9311
+                    },
+                    {
+                        "day": 46,
+                        "susceptible": 472781,
+                        "infectious": 10117,
+                        "dead": 14502,
+                        "vaccinated": 10998,
+                        "hospitalized": 66,
+                        "removed": 9876
+                    },
+                    {
+                        "day": 47,
+                        "susceptible": 471320,
+                        "infectious": 10486,
+                        "dead": 15085,
+                        "vaccinated": 11232,
+                        "hospitalized": 72,
+                        "removed": 10385
+                    },
+                    {
+                        "day": 48,
+                        "susceptible": 469838,
+                        "infectious": 10805,
+                        "dead": 15685,
+                        "vaccinated": 11466,
+                        "hospitalized": 73,
+                        "removed": 10948
+                    },
+                    {
+                        "day": 49,
+                        "susceptible": 468301,
+                        "infectious": 11109,
+                        "dead": 16373,
+                        "vaccinated": 11700,
+                        "hospitalized": 75,
+                        "removed": 11493
+                    },
+                    {
+                        "day": 50,
+                        "susceptible": 466705,
+                        "infectious": 11474,
+                        "dead": 17004,
+                        "vaccinated": 11934,
+                        "hospitalized": 67,
+                        "removed": 12093
+                    },
+                    {
+                        "day": 51,
+                        "susceptible": 465147,
+                        "infectious": 11692,
+                        "dead": 17714,
+                        "vaccinated": 12168,
+                        "hospitalized": 70,
+                        "removed": 12723
+                    },
+                    {
+                        "day": 52,
+                        "susceptible": 463508,
+                        "infectious": 12037,
+                        "dead": 18329,
+                        "vaccinated": 12402,
+                        "hospitalized": 81,
+                        "removed": 13402
+                    },
+                    {
+                        "day": 53,
+                        "susceptible": 461864,
+                        "infectious": 12069,
+                        "dead": 19307,
+                        "vaccinated": 12636,
+                        "hospitalized": 71,
+                        "removed": 14036
+                    },
+                    {
+                        "day": 54,
+                        "susceptible": 460291,
+                        "infectious": 12276,
+                        "dead": 19968,
+                        "vaccinated": 12870,
+                        "hospitalized": 81,
+                        "removed": 14741
+                    },
+                    {
+                        "day": 55,
+                        "susceptible": 458629,
+                        "infectious": 12461,
+                        "dead": 20758,
+                        "vaccinated": 13104,
+                        "hospitalized": 77,
+                        "removed": 15428
+                    },
+                    {
+                        "day": 56,
+                        "susceptible": 456997,
+                        "infectious": 12614,
+                        "dead": 21498,
+                        "vaccinated": 13338,
+                        "hospitalized": 83,
+                        "removed": 16167
+                    },
+                    {
+                        "day": 57,
+                        "susceptible": 455343,
+                        "infectious": 12716,
+                        "dead": 22285,
+                        "vaccinated": 13572,
+                        "hospitalized": 80,
+                        "removed": 16932
+                    },
+                    {
+                        "day": 58,
+                        "susceptible": 453679,
+                        "infectious": 12691,
+                        "dead": 23233,
+                        "vaccinated": 13806,
+                        "hospitalized": 82,
+                        "removed": 17673
+                    },
+                    {
+                        "day": 59,
+                        "susceptible": 452044,
+                        "infectious": 13027,
+                        "dead": 23822,
+                        "vaccinated": 14040,
+                        "hospitalized": 93,
+                        "removed": 18383
+                    },
+                    {
+                        "day": 60,
+                        "susceptible": 450407,
+                        "infectious": 13177,
+                        "dead": 24555,
+                        "vaccinated": 14274,
+                        "hospitalized": 92,
+                        "removed": 19137
+                    },
+                    {
+                        "day": 61,
+                        "susceptible": 448700,
+                        "infectious": 13428,
+                        "dead": 25175,
+                        "vaccinated": 14508,
+                        "hospitalized": 86,
+                        "removed": 19973
+                    },
+                    {
+                        "day": 62,
+                        "susceptible": 446951,
+                        "infectious": 13689,
+                        "dead": 25852,
+                        "vaccinated": 14742,
+                        "hospitalized": 92,
+                        "removed": 20784
+                    },
+                    {
+                        "day": 63,
+                        "susceptible": 445144,
+                        "infectious": 13939,
+                        "dead": 26534,
+                        "vaccinated": 14976,
+                        "hospitalized": 108,
+                        "removed": 21659
+                    },
+                    {
+                        "day": 64,
+                        "susceptible": 443238,
+                        "infectious": 12923,
+                        "dead": 28556,
+                        "vaccinated": 15210,
+                        "hospitalized": 71,
+                        "removed": 22559
+                    },
+                    {
+                        "day": 65,
+                        "susceptible": 441636,
+                        "infectious": 13022,
+                        "dead": 29230,
+                        "vaccinated": 15444,
+                        "hospitalized": 79,
+                        "removed": 23388
+                    },
+                    {
+                        "day": 66,
+                        "susceptible": 440051,
+                        "infectious": 12962,
+                        "dead": 30060,
+                        "vaccinated": 15678,
+                        "hospitalized": 71,
+                        "removed": 24203
+                    },
+                    {
+                        "day": 67,
+                        "susceptible": 438458,
+                        "infectious": 12730,
+                        "dead": 31119,
+                        "vaccinated": 15912,
+                        "hospitalized": 69,
+                        "removed": 24969
+                    },
+                    {
+                        "day": 68,
+                        "susceptible": 436858,
+                        "infectious": 12763,
+                        "dead": 31849,
+                        "vaccinated": 16146,
+                        "hospitalized": 62,
+                        "removed": 25806
+                    },
+                    {
+                        "day": 69,
+                        "susceptible": 435285,
+                        "infectious": 12890,
+                        "dead": 32471,
+                        "vaccinated": 16380,
+                        "hospitalized": 76,
+                        "removed": 26630
+                    },
+                    {
+                        "day": 70,
+                        "susceptible": 433692,
+                        "infectious": 12837,
+                        "dead": 33296,
+                        "vaccinated": 16614,
+                        "hospitalized": 59,
+                        "removed": 27451
+                    },
+                    {
+                        "day": 71,
+                        "susceptible": 432010,
+                        "infectious": 13175,
+                        "dead": 33847,
+                        "vaccinated": 16848,
+                        "hospitalized": 65,
+                        "removed": 28244
+                    },
+                    {
+                        "day": 72,
+                        "susceptible": 430430,
+                        "infectious": 13081,
+                        "dead": 34670,
+                        "vaccinated": 17082,
+                        "hospitalized": 63,
+                        "removed": 29095
+                    },
+                    {
+                        "day": 73,
+                        "susceptible": 428807,
+                        "infectious": 13225,
+                        "dead": 35297,
+                        "vaccinated": 17316,
+                        "hospitalized": 69,
+                        "removed": 29947
+                    },
+                    {
+                        "day": 74,
+                        "susceptible": 427139,
+                        "infectious": 12909,
+                        "dead": 36402,
+                        "vaccinated": 17550,
+                        "hospitalized": 53,
+                        "removed": 30826
+                    },
+                    {
+                        "day": 75,
+                        "susceptible": 425593,
+                        "infectious": 12871,
+                        "dead": 37095,
+                        "vaccinated": 17784,
+                        "hospitalized": 67,
+                        "removed": 31717
+                    },
+                    {
+                        "day": 76,
+                        "susceptible": 423975,
+                        "infectious": 12940,
+                        "dead": 37821,
+                        "vaccinated": 18018,
+                        "hospitalized": 78,
+                        "removed": 32540
+                    }
+                ]
+            
+            setPopulationData(data)
+            setHealthAuthorityData(data)
+
             setJobLoading(false)
             setConfigLoading(false)
             setHealthAuthorityDataLoading(false)
@@ -642,6 +1389,7 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
     const [userToEdit, setUserToEdit] = useState(null)
 
     const onAllowViewClick = () => {
+        return
         setShareLoading(true)
         setShareSuccess(false)
         setShareError(false)
@@ -661,6 +1409,7 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
     }
 
     const onAllowEditClick = () => {
+        return
         setShareLoading(true)
         setShareSuccess(false)
         setShareError(false)
@@ -680,6 +1429,7 @@ const Simulation = ({ setConfigEditMode, minimized, setMinimized }) => {
     }
 
     const onRemoveAccessClick = () => {
+        return
         setShareLoading(true)
         setShareSuccess(false)
         setShareError(false)
