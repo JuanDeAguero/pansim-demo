@@ -1,1 +1,1 @@
-# PanSim Frontend DEMO
+# PanSim DEMO
